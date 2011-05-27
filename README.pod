@@ -1,0 +1,26 @@
+=head1 prelbrew-mini.el
+
+This is a minimal perlbrew utility for emacs. It does only the minimal thing :
+computing the path to various perl binaries.
+
+=head1 Usage
+
+=head2 with flymake and cperl-mode
+
+in your .emacs :
+
+  (require 'perlbrew-mini)
+  (perlbrew-mini-set-perls-dir "/home/uername/perl5/perlbrew/perls/") ;; change to your username
+  (perlbrew-mini-use "perl-5.12.2")
+  
+  (require 'flymake)
+  
+  (defun flymake-perl-init ()
+    (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                       'flymake-create-temp-inplace))
+           (local-file (file-relative-name
+                        temp-file
+                        (file-name-directory buffer-file-name))))
+      (list (perlbrew-mini-get-current-perl-path) (list "-MProject::Libs" "-wc" local-file))))
+  
+  (add-hook 'cperl-mode-hook (lambda () (flymake-mode t)))
