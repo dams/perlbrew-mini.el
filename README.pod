@@ -15,7 +15,7 @@ In your .emacs :
   (require 'perlbrew-mini)
 
   ;; by default perlbrew-mini-set-perls is set to $HOME/perl5/pelbrew/perls/
-  (perlbrew-mini-set-perls-dir "/home/uername/path/to/perl5/perlbrew/perls/")
+  (perlbrew-mini-set-perls-dir "/home/username/path/to/perl5/perlbrew/perls/")
 
   (perlbrew-mini-use "perl-5.12.2")
   
