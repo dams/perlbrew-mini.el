@@ -21,7 +21,8 @@
 ;;; Commentary:
 
 ;; (require 'perlbrew-mini)
-;; (perlbrew-mini-set-perls-dir "/home/damien/perl5/perlbrew/perls/") ;; set to the directory containing all the perls
+;; set to the directory containing all the perls (defaults to $HOME/perl5/perlbrew/perls/)
+;; (perlbrew-mini-set-perls-dir "/home/username/perl5/perlbrew/perls/")
 ;; (perlbrew-mini-use "perl-5.12.3") ;; initialize perl version to use
 
 ;; Later on, the following lisp functions will be available :
