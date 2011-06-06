@@ -32,7 +32,7 @@
 
 ;;; Code:
 
-(defvar perlbrew-mini-perls-dir nil)
+(defvar perlbrew-mini-perls-dir (concat (getenv "HOME") "/perl5/perlbrew/perls/"))
 (defvar perlbrew-mini-current-perl-path nil)
 (defvar perlbrew-mini-current-version nil)
 
@@ -44,7 +44,6 @@
 (defun perlbrew-mini-set-perls-dir (path)
   (setq perlbrew-mini-perls-dir path)
 )
-
 
 (defun perlbrew-mini-get-current-perl-path ()
   perlbrew-mini-current-perl-path)

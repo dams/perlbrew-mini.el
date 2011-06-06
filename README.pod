@@ -13,7 +13,10 @@ you wish to use.
 In your .emacs :
 
   (require 'perlbrew-mini)
-  (perlbrew-mini-set-perls-dir "/home/uername/perl5/perlbrew/perls/") ;; change to your username
+
+  ;; by default perlbrew-mini-set-perls is set to $HOME/perl5/pelbrew/perls/
+  (perlbrew-mini-set-perls-dir "/home/uername/path/to/perl5/perlbrew/perls/")
+
   (perlbrew-mini-use "perl-5.12.2")
   
   (require 'flymake)
