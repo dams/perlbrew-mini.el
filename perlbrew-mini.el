@@ -39,6 +39,7 @@
 (defun perlbrew-mini-use (version)
   (perlbrew-mini-set-current-version version )
   (perlbrew-mini-set-current-perl-path)
+  (perlbrew-mini-set-current-exec-path)
 )
 
 (defun perlbrew-mini-set-perls-dir (path)
@@ -47,6 +48,18 @@
 
 (defun perlbrew-mini-get-current-perl-path ()
   perlbrew-mini-current-perl-path)
+
+(defun perlbrew-mini-set-current-exec-path ()
+
+  ;; Prepend perlbrew paths to exec-path
+  (add-to-list 'exec-path (concat perlbrew-mini-perls-dir perlbrew-mini-current-version "/bin"))
+
+  ;; set PATH to be the same as exec-path, clobber the old PATH value.
+  (setenv "PATH"
+          (reduce
+           (lambda (a b) (concatenate 'string a ":" b))
+           exec-path))
+  )
 
 (defun perlbrew-mini-set-current-perl-path ()
   (setq perlbrew-mini-current-perl-path
