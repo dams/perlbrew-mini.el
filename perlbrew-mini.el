@@ -18,16 +18,28 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-;;; Commentary:
+;;; Simple Usage:
+
+;;  This will look for available perls in the default perlbrew directory
+;;  ($HOME/perl5/perlbrew/perls/) and load the latest version
 
 ;; (require 'perlbrew-mini)
-;; set to the directory containing all the perls (defaults to $HOME/perl5/perlbrew/perls/)
+;; (perlbrew-mini-use-latest)
+
+
+;; More options:
+
+;; (require 'perlbrew-mini)
+
+;; the directory containing all the perls (defaults to $HOME/perl5/perlbrew/perls/)
 ;; (perlbrew-mini-set-perls-dir "/home/username/perl5/perlbrew/perls/")
+
+;; the version to use
 ;; (perlbrew-mini-use "perl-5.12.3") ;; initialize perl version to use
 
 ;; Later on, the following lisp functions will be available :
-;;   perlbrew-get-current-perl-path ;; returns the current perl path
-;;   perlbrew-get-current-version ;; returns the current perl version in use
+;;   perlbrew-mini-get-current-perl-path ;; returns the current perl path
+;;   perlbrew-mini-get-current-version ;; returns the current perl version in use
 
 ;; These functions are especially useful with flymake.
 
@@ -43,12 +55,22 @@
   (perlbrew-mini-set-current-exec-path)
 )
 
+(defun perlbrew-mini-use-latest ()
+  (let (latest)
+    (setq latest (car (last (sort (directory-files perlbrew-mini-perls-dir) 'string<))))
+    (perlbrew-mini-use latest)
+    )
+)
+
 (defun perlbrew-mini-set-perls-dir (path)
   (setq perlbrew-mini-perls-dir path)
 )
 
 (defun perlbrew-mini-get-current-perl-path ()
   perlbrew-mini-current-perl-path)
+
+(defun perlbrew-mini-get-current-version ()
+  perlbrew-mini-current-version)
 
 (defun perlbrew-mini-set-current-exec-path ()
 

@@ -1,24 +1,50 @@
 =head1 prelbrew-mini.el
 
-This is a minimal perlbrew utility for emacs. It does only the minimal thing :
-computing the path to various perl binaries.
+This is a minimal perlbrew utility for emacs. It does only the minimal things :
+computing the path to various perl binaries, and setting exec-path and PATH
+accordingly.
 
 =head1 Usage
 
-=head2 with flymake and cperl-mode
-
-Warning, for this to work you need to install Project::Libs inside the perlbrew
-you wish to use.
+=head2 basic usage
 
 In your .emacs :
 
   (require 'perlbrew-mini)
+  (perlbrew-mini-use-latest)
+
+By default this will try to find perlbrew perls from
+$HOME/perl5/pelbrew/perls/. It will then try to use the latest perl found in
+that directory. You can override the various options below:
+
+To override the perlbrew directory:
 
   ;; by default perlbrew-mini-set-perls is set to $HOME/perl5/pelbrew/perls/
   (perlbrew-mini-set-perls-dir "/home/username/path/to/perl5/perlbrew/perls/")
 
+To override which perlbrew perl version to use:
+
+  ;; by default it will use the latest perl (alphanumeric comparison on the file name)
   (perlbrew-mini-use "perl-5.12.2")
-  
+
+Once loaded, perlbrew-mini provides these functions:
+
+  perlbrew-mini-get-current-perl-path ;; returns the current perl path
+  perlbrew-mini-get-current-version ;; returns the current perl version in use
+
+See below for a real life example
+
+=head2 with flymake and cperl-mode
+
+This is an example to use flymake with perlbrew. This method will make flymake
+create its temporary file in the same directory than the Perl source file it's
+examinating.
+
+Warning, for this to work you need to install Project::Libs inside the perlbrew
+you wish to use.
+
+  (require 'perlbrew-mini)
+  (perlbrew-mini-use "perl-5.12.2")
   (require 'flymake)
   
   (defun flymake-perl-init ()
@@ -27,6 +53,12 @@ In your .emacs :
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-      (list (perlbrew-mini-get-current-perl-path) (list "-MProject::Libs" "-wc" local-file))))
+      (list (perlbrew-mini-get-current-perl-path)
+            (list "-MProject::Libs" "-wc" local-file))))
   
   (add-hook 'cperl-mode-hook (lambda () (flymake-mode t)))
+
+If you'd like flymake to create its temporary files in a temporary directory
+instead, please see
+http://blog.urth.org/2011/06/flymake-versus-the-catalyst-restarter.html.
+
