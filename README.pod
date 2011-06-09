@@ -60,5 +60,5 @@ you wish to use.
 
 If you'd like flymake to create its temporary files in a temporary directory
 instead, please see
-http://blog.urth.org/2011/06/flymake-versus-the-catalyst-restarter.html.
+L<http://blog.urth.org/2011/06/flymake-versus-the-catalyst-restarter.html>.
 
