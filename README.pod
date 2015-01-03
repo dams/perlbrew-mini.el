@@ -1,4 +1,4 @@
-=head1 prelbrew-mini.el
+=head1 perlbrew-mini.el
 
 This is a minimal perlbrew utility for emacs. It does only the minimal things :
 computing the path to various perl binaries, and setting exec-path and PATH
